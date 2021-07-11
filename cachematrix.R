@@ -1,14 +1,14 @@
 makeCacheMatrix <- function(x = matrix()) { ##this defines the argument with a default mode of "matrix"
-  j <- NULL	## j is initialized as NULL which will hold the value of the matrix inverse
-  set <- function(y){ ## this defines that the  function is assigned to 'set'
-  x <<- y ## this is the value of matrix which is in the parent environment
-  j <<- NULL ##if a new matrix is present, this resets 'j' to NULL
+  a <- NULL	                                ## a is initialized as NULL which will hold the value of the matrix inverse
+  set <- function(y){                       ## this defines that the  function is assigned to 'set'
+  x <<- y                                   ## this is the value of matrix which is in the parent environment
+  a <<- NULL                                ##if a new matrix is present, this resets 'a' to NULL
   }
-  get <- function()x ##this defines the value of the function and returns the matrix arguments value
+  get <- function()x                        ##this defines the value of the function and returns the matrix arguments value
 
-  setInverse <- function(inverse) j <<- inverse ## this assigns value of 'j' in parent environment
-  getInverse <- function() j ## this gets the value of 'j'
-  list(set = set, get = get, ## this is in referance to the functions with the $ operator
+  setInverse <- function(inverse) a <<- inverse           ## this assigns value of 'a' in parent environment
+  getInverse <- function() a                              ## this gets the value of 'j'
+  list(set = set, get = get,                              ## this is in referance to the functions with the $ operator
   setInverse = setInverse, 
   getInverse = getInverse)
 }
@@ -17,13 +17,13 @@ makeCacheMatrix <- function(x = matrix()) { ##this defines the argument with a d
 
 cacheSolve <- function(x, ...) {
 ## Return a matrix that is the inverse of 'x'
-  j <- x$getInverse()
-  if(!is.null(j)){
+  a <- x$getInverse()
+  if(!is.null(a)){
   message("getting cached data")
-  return(j)
+  return(a)
   }
   mat <- x$get()
-  j <- solve(mat,...)
-  x$setInverse(j)
-  j
+  a <- solve(mat,...)
+  x$setInverse(a)
+  a
 }
